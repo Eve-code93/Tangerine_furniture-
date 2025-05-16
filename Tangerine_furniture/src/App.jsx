@@ -10,27 +10,28 @@ import HotelsPage from "./pages/HotelsPage";
 import AirbnbPage from "./pages/AirbnbPage";
 import ContactPage from "./pages/ContactPage";
 
-function Home() {
-  return (
-    <>
-      <HeroSection />
-      <NewArrivalsOnSale />
-    </>
-  );
-}
-
 export default function App() {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/living-room" element={<LivingRoomPage />} />
-        <Route path="/bedroom" element={<BedroomPage />} />
-        <Route path="/hotels" element={<HotelsPage />} />
-        <Route path="/airbnb" element={<AirbnbPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <HeroSection />
+                <NewArrivalsOnSale />
+              </>
+            }
+          />
+          <Route path="/living-room" element={<LivingRoomPage />} />
+          <Route path="/bedroom" element={<BedroomPage />} />
+          <Route path="/hotels" element={<HotelsPage />} />
+          <Route path="/airbnb" element={<AirbnbPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </main>
     </Router>
   );
 }
