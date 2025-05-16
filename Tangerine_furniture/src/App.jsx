@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
-import { NewArrivalsOnSale } from "./components/NewArrivalsOnSale";
+import  {BestSellers }from "./components/Best sellers.jsx";
 
 import LivingRoomPage from "./pages/LivingRoomPage";
 import BedroomPage from "./pages/BedroomPage";
@@ -21,7 +21,7 @@ export default function App() {
             element={
               <>
                 <HeroSection />
-                <NewArrivalsOnSale />
+                <BestSellers />
               </>
             }
           />
