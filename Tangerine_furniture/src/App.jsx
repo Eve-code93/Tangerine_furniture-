@@ -2,13 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
-import  {BestSellers }from "./components/Best sellers.jsx";
-
+import { BestSellers } from "./components/Best sellers.jsx";
 import LivingRoomPage from "./pages/LivingRoomPage";
 import BedroomPage from "./pages/BedroomPage";
-import HotelsPage from "./pages/HotelsPage";
-import AirbnbPage from "./pages/AirbnbPage";
+import HospitalityPage from "./pages/HospitalityPage";
 import ContactPage from "./pages/ContactPage";
+import OutdoorPage from "./pages/OutdoorPage"; // Make sure to import if you have this
+import OfficePage from "./pages/OfficePage"; // Make sure to import if you have this
 
 export default function App() {
   return (
@@ -27,8 +27,9 @@ export default function App() {
           />
           <Route path="/living-room" element={<LivingRoomPage />} />
           <Route path="/bedroom" element={<BedroomPage />} />
-          <Route path="/hotels" element={<HotelsPage />} />
-          <Route path="/airbnb" element={<AirbnbPage />} />
+          <Route path="/hospitality" element={<HospitalityPage />} />
+          <Route path="/outdoor" element={<OutdoorPage />} />
+          <Route path="/office" element={<OfficePage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>

@@ -1,274 +1,202 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FiMenu, FiX, FiChevronDown, FiShoppingCart, FiSearch, FiUser } from "react-icons/fi";
 
 export function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState({
-    livingRoom: false,
-    bedroom: false,
-    outdoor: false,
-    office: false,
-  });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   const toggleDropdown = (menu) => {
-    setDropdownOpen((prev) => ({
-      ...prev,
-      [menu]: !prev[menu],
-    }));
+    setActiveDropdown(activeDropdown === menu ? null : menu);
   };
 
   const closeAll = () => {
-    setIsOpen(false);
-    setDropdownOpen({
-      livingRoom: false,
-      bedroom: false,
-      outdoor: false,
-      office: false,
-    });
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
   };
+
+  const categories = [
+    {
+      name: "Living Room",
+      path: "/living-room",
+      subcategories: [
+        { name: "Sofas", path: "/living-room#sofas" },
+        { name: "TV Consoles", path: "/living-room#tv-consoles" },
+        { name: "Coffee Tables", path: "/living-room#coffee-tables" }
+      ]
+    },
+    {
+      name: "Bedroom",
+      path: "/bedroom",
+      subcategories: [
+        { name: "Beds", path: "/bedroom#beds" },
+        { name: "Dressers", path: "/bedroom#dressers" },
+        { name: "Nightstands", path: "/bedroom#nightstands" }
+      ]
+    },
+    {
+      name: "Hospitality",
+      path: "/hospitality"
+    },
+    {
+      name: "Outdoor",
+      path: "/outdoor"
+    },
+    {
+      name: "Office",
+      path: "/office"
+    }
+  ];
 
   return (
     <>
-      {/* Flash Banner */}
-      <div className="w-full text-center bg-[#F5F1E9] text-[#102A43] py-1 text-sm font-semibold animate-pulse">
-        🚚 Free Delivery on All Orders!
+      {/* Promo Banner */}
+      <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white text-center py-2 text-sm font-bold">
+        🎉 Limited Time: Free Shipping on All Orders Over $99 🎉
       </div>
 
-      {/* Main Navbar */}
-      <header className="text-[#102A43] shadow-md">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between flex-col">
-          {/* Left Section: Mobile Menu */}
-          <div className="md:hidden w-full flex justify-start items-center mb-2">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-[#FF7035] p-1 focus:outline-none font-semibold"
-              aria-label="Toggle Menu"
-            >
-              Menu
-            </button>
-            {isOpen && (
-              <div className="absolute top-12 left-0 w-56 border border-[#102A43] shadow-xl z-50 rounded-md p-4 font-semibold bg-white">
-                <ul className="space-y-4 text-left text-[#102A43]">
-                  {/* ... Mobile menu items ... */}
-                  <li>
-                    <button
-                      onClick={() => toggleDropdown("livingRoom")}
-                      className="w-full text-left hover:text-[#FF7035] transition"
-                    >
-                      Living Room
-                    </button>
-                    {dropdownOpen.livingRoom && (
-                      <ul className="pl-4 mt-2 space-y-2 text-[#102A43]">
-                        <li>
-                          <Link to="/livingroom" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Sofas
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/livingroom" onClick={closeAll} className="hover:text-[#FF7035]">
-                            TV Consoles
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/livingroom" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Coffee Tables
-                          </Link>
-                        </li>
-                      </ul>
-                    )}
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => toggleDropdown("bedroom")}
-                      className="w-full text-left hover:text-[#FF7035] transition"
-                    >
-                      Bedroom
-                    </button>
-                    {dropdownOpen.bedroom && (
-                      <ul className="pl-4 mt-2 space-y-2 text-[#102A43]">
-                        <li>
-                          <Link to="/bedroom" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Beds
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/bedroom" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Mirrors
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/bedroom" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Bedside Cabinets
-                          </Link>
-                        </li>
-                      </ul>
-                    )}
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => toggleDropdown("outdoor")}
-                      className="w-full text-left hover:text-[#FF7035] transition"
-                    >
-                      Outdoor Furniture
-                    </button>
-                    {dropdownOpen.outdoor && (
-                      <ul className="pl-4 mt-2 space-y-2 text-[#102A43]">
-                        <li>
-                          <Link to="/outdoor" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Chairs
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/outdoor" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Tables
-                          </Link>
-                        </li>
-                      </ul>
-                    )}
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => toggleDropdown("office")}
-                      className="w-full text-left hover:text-[#FF7035] transition"
-                    >
-                      Office Furniture
-                    </button>
-                    {dropdownOpen.office && (
-                      <ul className="pl-4 mt-2 space-y-2 text-[#102A43]">
-                        <li>
-                          <Link to="/office" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Desks
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/office" onClick={closeAll} className="hover:text-[#FF7035]">
-                            Chairs
-                          </Link>
-                        </li>
-                      </ul>
-                    )}
-                  </li>
-                  <li>
-                    <Link to="/hospitality" onClick={closeAll} className="text-[#102A43] hover:text-[#FF7035] transition font-semibold">
-                      Hospitality (Hotels & Airbnb)
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/contact" onClick={closeAll} className="text-[#102A43] hover:text-[#FF7035] transition font-semibold">
-                      Contact Us
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
+      {/* Main Header */}
+      <header className="sticky top-0 z-50 bg-white shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Mobile Menu Button */}
+            <div className="flex md:hidden items-center">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-gray-700 hover:text-orange-500 p-2 rounded-md"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+              </button>
+            </div>
 
-          {/* Center Brand */}
-          <div className="text-2xl font-bold text-[#FF7035] w-full text-center mb-2 md:mb-0">
-            <Link to="/" onClick={closeAll} className="hover:text-[#D86F27] transition">
-              Tangerine Furniture
-            </Link>
-          </div>
+            {/* Logo */}
+            <div className="flex-shrink-0 flex items-center">
+              <Link
+                to="/"
+                onClick={closeAll}
+                className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 hover:from-amber-500 hover:to-orange-500 transition-all duration-300"
+              >
+                Tangerine
+              </Link>
+              <span className="ml-1 text-xl font-bold text-gray-800">Furniture</span>
+            </div>
 
-          {/* Right Section: Desktop Navigation */}
-          <nav className="hidden md:flex flex-grow justify-end">
-            <ul className="flex space-x-6 font-semibold text-lg items-center text-[#102A43]">
-              <li>
-                <Link to="/" className="hover:text-[#FF7035] transition">
-                  Home
-                </Link>
-              </li>
-              <li className="relative group">
-                <button className="hover:text-[#FF7035] transition font-semibold cursor-default">
-                  Living Room
-                </button>
-                <ul className="absolute hidden group-hover:block bg-white rounded shadow-lg min-w-[180px] z-30 py-2">
-                  <li>
-                    <Link to="/livingroom" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Sofas
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              {categories.map((category) => (
+                <div key={category.name} className="relative group">
+                  {category.subcategories ? (
+                    <>
+                      <button
+                        onClick={() => toggleDropdown(category.name)}
+                        className="flex items-center text-gray-800 hover:text-orange-500 font-medium transition-colors"
+                      >
+                        {category.name}
+                        <FiChevronDown className={`ml-1 transition-transform ${activeDropdown === category.name ? 'rotate-180' : ''}`} />
+                      </button>
+                      {activeDropdown === category.name && (
+                        <div className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-gray-200 py-1 z-50 animate-fadeIn">
+                          {category.subcategories.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              to={sub.path}
+                              onClick={closeAll}
+                              className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-500"
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      to={category.path}
+                      className="text-gray-800 hover:text-orange-500 font-medium transition-colors"
+                    >
+                      {category.name}
                     </Link>
-                  </li>
-                  <li>
-                    <Link to="/livingroom" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      TV Consoles
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/livingroom" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Coffee Tables
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="relative group">
-                <button className="hover:text-[#FF7035] transition font-semibold cursor-default">
-                  Bedroom
-                </button>
-                <ul className="absolute hidden group-hover:block bg-white rounded shadow-lg min-w-[180px] z-30 py-2">
-                  <li>
-                    <Link to="/bedroom" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Beds
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/bedroom" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Mirrors
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/bedroom" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Bedside Cabinets
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="relative group">
-                <button className="hover:text-[#FF7035] transition font-semibold cursor-default">
-                  Outdoor Furniture
-                </button>
-                <ul className="absolute hidden group-hover:block bg-white rounded shadow-lg min-w-[180px] z-30 py-2">
-                  <li>
-                    <Link to="/outdoor" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Chairs
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/outdoor" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Tables
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="relative group">
-                <button className="hover:text-[#FF7035] transition font-semibold cursor-default">
-                  Office Furniture
-                </button>
-                <ul className="absolute hidden group-hover:block bg-white rounded shadow-lg min-w-[180px] z-30 py-2">
-                  <li>
-                    <Link to="/office" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Desks
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/office" className="block px-4 py-2 text-[#102A43] hover:text-[#FF7035]">
-                      Chairs
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <Link to="/hospitality" className="hover:text-[#FF7035] transition font-semibold">
-                  Hospitality (Hotels & Airbnb)
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-[#FF7035] transition font-semibold">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-          </nav>
+                  )}
+                </div>
+              ))}
+              <Link
+                to="/contact"
+                className="text-gray-800 hover:text-orange-500 font-medium transition-colors"
+              >
+                Contact
+              </Link>
+            </nav>
+
+            {/* Right Icons */}
+            <div className="flex items-center space-x-4">
+              <button className="p-2 text-gray-700 hover:text-orange-500">
+                <FiSearch size={20} />
+              </button>
+              <button className="p-2 text-gray-700 hover:text-orange-500">
+                <FiUser size={20} />
+              </button>
+              <button className="p-2 text-gray-700 hover:text-orange-500 relative">
+                <FiShoppingCart size={20} />
+                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  0
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 bg-white z-40 mt-16 overflow-y-auto animate-slideIn">
+            <div className="px-4 py-2 space-y-1">
+              {categories.map((category) => (
+                <div key={category.name} className="border-b border-gray-200 py-2">
+                  {category.subcategories ? (
+                    <>
+                      <button
+                        onClick={() => toggleDropdown(category.name)}
+                        className="w-full flex justify-between items-center px-3 py-3 text-lg font-medium text-gray-800 hover:text-orange-500"
+                      >
+                        {category.name}
+                        <FiChevronDown className={`transition-transform ${activeDropdown === category.name ? 'rotate-180' : ''}`} />
+                      </button>
+                      {activeDropdown === category.name && (
+                        <div className="pl-4 space-y-2 mt-2 animate-fadeIn">
+                          {category.subcategories.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              to={sub.path}
+                              onClick={closeAll}
+                              className="block px-3 py-2 text-gray-700 hover:text-orange-500"
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      to={category.path}
+                      onClick={closeAll}
+                      className="block px-3 py-3 text-lg font-medium text-gray-800 hover:text-orange-500"
+                    >
+                      {category.name}
+                    </Link>
+                  )}
+                </div>
+              ))}
+              <Link
+                to="/contact"
+                onClick={closeAll}
+                className="block px-3 py-3 text-lg font-medium text-gray-800 hover:text-orange-500"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
+        )}
       </header>
     </>
   );
