@@ -52,7 +52,7 @@ export function Header() {
     <>
       {/* Promo Banner */}
       <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white text-center py-2 text-sm font-bold">
-        🎉 Limited Time: Free Shipping on All Orders Over $99 🎉
+        🎉 Limited Time: Free Shipping on All Orders Over kes 150,000! call 0712345678! 🎉
       </div>
 
       {/* Main Header */}
@@ -77,7 +77,7 @@ export function Header() {
                 onClick={closeAll}
                 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 hover:from-amber-500 hover:to-orange-500 transition-all duration-300"
               >
-                Tangerine
+                Ubunifu 
               </Link>
               <span className="ml-1 text-xl font-bold text-gray-800">Furniture</span>
             </div>
